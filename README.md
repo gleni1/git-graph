@@ -24,3 +24,7 @@ To install the necessary dependencies for the project, run:
 
 ```bash
 go mod tidy
+```
+
+## How the graph will look like:
+![Go Git Graph](assets/images/graph.png)
