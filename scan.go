@@ -104,15 +104,23 @@ func recursiveScanFolder(folder string) []string {
 	return scanGitFolders(make([]string, 0), folder)
 }
 
-// scan scans a new folder for Git repositories
+// scan searches the specified folder for Git repositories and updates the repository list
 func scan(folder string) {
-	fmt.Printf("Found folders:\n\n")
+	fmt.Println("Scanning folder for Git repositories...")
+
+	// Find repositories recursively
 	repositories := recursiveScanFolder(folder)
+	if len(repositories) == 0 {
+		fmt.Println("No repositories found.")
+		return
+	}
+
+	// Update the .dot file with the new repositories
 	filePath := getDotFilePath()
 	addNewSliceElementsToFile(filePath, repositories)
-	fmt.Printf("\n\nSuccessfully added\n\n")
-}
 
+	fmt.Println("\nSuccessfully added repositories to the file.")
+}
 // scanGitFolders returns a list of subfolders of `folder` ending with `.git`.
 // Returns the base folder of the repo, the .git folder parent.
 // Recursively searches in the subfolders by passing an existing `folders` slice.
